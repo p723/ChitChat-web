@@ -1,16 +1,12 @@
 import React from "react";
-import styles from "./Welcome.module.css";
+import styles from "./OtpScreen.module.css";
 // import Card from "../../components/shared/Card/Card";
 import { useHistory } from "react-router-dom";
 import Button from "../../../components/Button/Button";
 import { HiMenu, HiSearch } from 'react-icons/hi';
-const Wellcome = () => {
+const OtpScreen = ({onNext}) => {
   
 const history = useHistory();
-
-  function startLogin(){
-    history.push('/authenticate');
-  }
 
   return (
     <>
@@ -26,7 +22,7 @@ const history = useHistory();
 to accept the<span> Terms of Service.</span></p>
          </div>
          <div className="text-center">
-         <Button onClick={startLogin} text="Agree and Continue" />
+         <Button onClick={onNext} text="Agree and Continue" />
          </div>
          <div className="text-center text-black-50">
          <p className={styles.from_txt}>from</p>
@@ -38,4 +34,4 @@ to accept the<span> Terms of Service.</span></p>
   );
 };
 
-export default Wellcome;
+export default OtpScreen;

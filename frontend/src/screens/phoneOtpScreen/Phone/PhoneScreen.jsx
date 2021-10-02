@@ -2,16 +2,20 @@ import React, { useState }  from "react";
 import styles from "./PhoneScreen.module.css";
 // import Card from "../../components/shared/Card/Card";
 import { useHistory } from "react-router-dom";
-import Button from "../../../../components/Button/Button";
+import Button from "../../../components/Button/Button";
+import Input from "../../../components/Input/Input";
 import { HiMenu, HiSearch } from 'react-icons/hi';
-import ReactPhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import 'react-phone-input-2/lib/material.css'
 
-const PhoneScreen = ({onNext}) => 
-state = { phone: "" };
-  function handleOnChange(value) {
-  this.setState({ phone: value })
+
+const inputStyle = {
+   width: "50px",
+   color: "#000",
 }
+const PhoneScreen = ({onNext}) => {
+const [phoneNumber, setPhoneNumber] = useState("");
+const [cCode, setcCode] = useState("+91");
+
 const history = useHistory();
 
   return (
@@ -21,18 +25,21 @@ const history = useHistory();
          <h1 className="pt-3 text-primary text-bold fs-1 mb-5">
          Enter your phone number
          </h1>
-         <ReactPhoneInput 
-         defaultCountry={'us'} 
-         value={this.state.phone}
-         onChange={phone => this.setState({ phone })}
-         inputExtraProps={{
-    name: 'phone',
-    required: true,
-    autoFocus: true
-  }}
-         />
           </div>
          <div className="text-center">
+         <div className="text-center d-inline-flex">
+         <Input
+          placeholder="Code"
+          type="tel"
+          value={cCode}
+          onChange={(e) => setcCode(e.target.value)}
+          style={inputStyle}
+         />
+         <Input
+          placeholder="phone number"
+         />
+         </div>
+         <p>{phoneNumber}</p>
          <Button onClick={onNext} text="Agree and Continue" />
          </div>
          

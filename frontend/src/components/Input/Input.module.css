@@ -1,0 +1,23 @@
+ .formControl{
+    color: #333;
+    background: #fff;
+    font-weight: 400;
+    letter-spacing: 1px;
+    height: 30px;
+    width: 100%;
+    max-width: 200px;
+    padding-left: 7px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #009977;
+    box-shadow: none;
+    outline: none;
+    transition: all .3s;
+    margin: 10px;
+}
+  .formControl:focus{
+    border-bottom: 2px solid #009977;
+}
+  .formControl::placeholder{
+    color: rgba(0,0,0,0.3);
+}

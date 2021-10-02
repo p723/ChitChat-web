@@ -2,9 +2,9 @@ import './App.css';
 import { IconContext } from "react-icons";
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 //import Navigation from './components/shared/Navigation/Navigation'
-import Wellcome from './screens/guestScreens/Wellcome/Wellcome';
+import Wellcome from './screens/Wellcome/Wellcome';
 // import Rooms from './pages/Rooms/Rooms';
-import Authenticate from './screens/guestScreens/phoneOtpScreen/Authenticate';
+import Authenticate from './screens/phoneOtpScreen/Authenticate';
 // import Activate from './pages/Activate/Activate';
 // import userEvent from '@testing-library/user-event';
 //import { useSelector } from 'react-redux';

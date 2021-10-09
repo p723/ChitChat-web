@@ -1,0 +1,30 @@
+.tabMenu {
+  display: inline-flex;
+  background: #128c7e;
+  width: 100%;
+  height: 35px;
+  align-items: center;
+}
+.tabItem {
+  color: rgba(255, 255, 255, 0.6);
+  height: 100%;
+  text-align: center;
+}
+.tabItem:first-child {
+  width: 15%;
+  align-items: center;
+  /* background: #000; */
+}
+.tabItem {
+  width: 30%;
+  align-items: center;
+  padding: 0;
+}
+.active {
+  color: #fff;
+  height: 100%;
+  width: 30%;
+  text-align: center;
+  border-bottom: 3px solid #fff;
+  padding: 0;
+}

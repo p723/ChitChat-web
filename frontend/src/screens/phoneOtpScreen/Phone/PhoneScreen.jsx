@@ -1,46 +1,77 @@
 import React, { useState }  from "react";
 import styles from "./PhoneScreen.module.css";
-// import Card from "../../components/shared/Card/Card";
-import { useHistory } from "react-router-dom";
 import Button from "../../../components/Button/Button";
 import Input from "../../../components/Input/Input";
-import { HiMenu, HiSearch } from 'react-icons/hi';
 import 'react-phone-input-2/lib/material.css'
+import { sendOtp } from "../../../http";
+import { useDispatch } from "react-redux";
+import { setOtp } from "../../../store/authSlice";
 
 
 const inputStyle = {
    width: "50px",
    color: "#000",
+   fontSize: "17px"
 }
 const PhoneScreen = ({onNext}) => {
-const [phoneNumber, setPhoneNumber] = useState("");
-const [cCode, setcCode] = useState("+91");
+const [email, setEmail] = useState("");
+const [loading, setLoading] = useState(false);
+// const [cCode, setcCode] = useState("+91");
+const dispatch = useDispatch();
 
-const history = useHistory();
+async function submit() {
+  setLoading(true);
+  if (!email) {
+    setLoading(false);
+    return
+  };
+  const { data } = await sendOtp({ email: email });
+  dispatch(setOtp({ email: data.email, hash: data.hash }));
+  console.log(data);
+  setLoading(false);
+  onNext();
+}
 
   return (
     <>
      <div className="container w-100">
          <div className="mt-5 text-center aline-item-center">
-         <h1 className="pt-3 text-primary text-bold fs-1 mb-5">
-         Enter your phone number
+         <h1 className="pt-3 text-primary text-bold fs-1">
+         Enter your Email Address
          </h1>
+         <p className="text-center text-black-50 mb-5">By entering your Email address <br /> w'll text you a one time password</p>
           </div>
          <div className="text-center">
-         <div className="text-center d-inline-flex">
+         <div className="text-center d-inline-flex mb-4">
          <Input
-          placeholder="Code"
-          type="tel"
-          value={cCode}
-          onChange={(e) => setcCode(e.target.value)}
-          style={inputStyle}
-         />
-         <Input
-          placeholder="phone number"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
          />
          </div>
-         <p>{phoneNumber}</p>
-         <Button onClick={onNext} text="Agree and Continue" />
+         <div >
+         { loading ? 
+         <svg
+                    className={styles.spinner}
+                    width="42"
+                    height="42"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <circle
+                        cx="21"
+                        cy="21"
+                        r="18"
+                        stroke="#C4C5C5"
+                        strokeWidth="4"
+                    />
+                    <path
+                        d="M20.778 1.001A20 20 0 111.542 25.627l3.876-.922a16.016 16.016 0 1015.404-19.72l-.044-3.984z"
+                        fill="#009977"
+                    />
+                </svg> :
+         <Button onClick={submit} text="next" /> }
+         </div>
          </div>
          
      </div>

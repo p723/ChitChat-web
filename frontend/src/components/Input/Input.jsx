@@ -5,7 +5,7 @@ const Input = (props) => {
     return (
       <>
         <input className={styles.formControl} type="text" {...props}/>
-      </>
+      </> 
    )
 }
 

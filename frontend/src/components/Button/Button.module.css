@@ -1,11 +1,12 @@
 .btn{
   padding: 8.5px;
+  padding-left: 25px;
+  padding-right: 25px;
   border: none;
   outline: none;
   background: #009977;
   color: #fff;
   text-align: center;
-  width: 95%;
   border-radius: 2px;
   text-transform: uppercase;
   font-weight: 400;

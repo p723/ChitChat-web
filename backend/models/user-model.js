@@ -3,6 +3,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+    phone: { type: String, required: false },
+    name: { type: String, required: false },
+    avatar: {
+            type: String,
+            required: false,
+            get: (avatar) => {
+                if (avatar) {
+                    return `http://localhost:5500${avatar}`;
+                }
+                return avatar;
+            },
+        },
     email: { type: String, required: true },
     activated: { type: Boolean, required: false, default: false }
 }, {

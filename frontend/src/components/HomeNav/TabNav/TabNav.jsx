@@ -1,8 +1,13 @@
 import React from "react";
 import style from './TabNav.module.css';
+import { useSelector, useDispatch } from "react-redux";
 import { MdCameraAlt } from 'react-icons/md';
+import { setActiveTab } from '../../../store/tabSlice';
 
+    
 const TabNav = () => {
+  const dispatch = useDispatch();
+  const { activeTab } = useSelector((state) => state.tab);
   return (
     <div>
       <div className={style.tabMenu}>
@@ -11,15 +16,15 @@ const TabNav = () => {
             <MdCameraAlt />
           </a>
         </div>
-        <div className={style.tabItem}>
+        <a onClick={ (e) => dispatch(setActiveTab(1))} className={activeTab == 1 ? style.active : style.tabItem}>
           Chats
-        </div>
-        <div className={style.tabItem}>
+        </a>
+        <a onClick={ (e) => dispatch(setActiveTab(2))} className={activeTab == 2 ? style.active : style.tabItem}>
           Status
-        </div>
-        <div className={style.tabItem}>
+        </a>
+        <a onClick={ (e) => dispatch(setActiveTab(3))} className={activeTab == 3 ? style.active : style.tabItem}>
           Calls
-        </div>
+        </a>
       </div>
     </div>
   );

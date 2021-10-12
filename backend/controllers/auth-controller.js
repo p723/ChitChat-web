@@ -101,14 +101,11 @@ class Authcontroller {
             userData = await tokenService.verifyRefreshToken(
                 refreshTokenFromCookie
             );
-            console.log(userData);
         } catch (err) {
             return res.status(401).json({ message: 'Invalid Token1' });
         }
         // Check if token is in db
-console.log(userData);
         try {
-          console.log(userData);
             const token = await tokenService.findRefreshToken(
                 userData._id,
                 refreshTokenFromCookie

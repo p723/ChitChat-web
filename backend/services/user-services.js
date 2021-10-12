@@ -1,4 +1,5 @@
 const userModel = require("../models/user-model");
+const UserDto = require("../dtos/userDtos");
 
 class UserServices {
 
@@ -9,6 +10,11 @@ class UserServices {
     async createUser(data) {
         const user = await userModel.create(data);
         return user;
+    }
+    async getAllUsers(types) {
+        const users = await userModel.find({ activated: { $in: types } });
+        const userDto = users.map((user) => new UserDto(user))
+        return userDto;
     }
 }
 

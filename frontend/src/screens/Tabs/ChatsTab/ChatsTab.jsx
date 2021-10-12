@@ -2,9 +2,9 @@
 
 import React, { Component } from "react";
 import styled from "styled-components";
-// import ChatListItem from "../../../components/ChatListItem/ChatListItem";
+import ChatListItem from "../../../components/ChatListItem/ChatListItem";
 // import SearchResult from "./SearchResult";
-// import { chats } from "./data/chats.js";
+import { chats } from "./chats.js";
 // import { messages } from "./data/messages.js";
 
 const StyledList = styled.ul`
@@ -14,7 +14,7 @@ const StyledList = styled.ul`
 
 type Props = {
   showChatScreen: Function,
-  searchTerm: string
+  searchTerm: string,
 };
 
 class ChatTab extends Component<Props> {
@@ -40,19 +40,21 @@ class ChatTab extends Component<Props> {
     //     </StyledList>
     //   );
     // } else {
-      return (
+    return (
+      <>
         <StyledList>
-          {/* {chats.map(item => (
+          {chats.map((item) => (
             <ChatListItem
               key={item.id}
               {...item}
               showChatScreen={this.props.showChatScreen}
             />
-          ))} */}
+          ))}
         </StyledList>
-      );
-    }
+      </>
+    );
   }
+}
 // }
 
 export default ChatTab;

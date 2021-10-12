@@ -4,8 +4,9 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 //import Navigation from './components/shared/Navigation/Navigation'
 import Wellcome from './screens/Wellcome/Wellcome';
 import Home from './screens/Home/Home';
-import Authenticate from './screens/phoneOtpScreen/Authenticate';
-import ProfileSetup from './screens/ProfileSetup/ProfileSetup';
+import Chats from './screens/Chats/Chats';
+import Authenticate from './screens/AuthSteps/Authenticate/Authenticate';
+import ProfileSetup from './screens/AuthSteps/Activate/ProfileSetup/ProfileSetup';
 // import userEvent from '@testing-library/user-event';
 import { useSelector } from 'react-redux';
 import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
@@ -32,6 +33,7 @@ function App() {
 
               <SemiProtectedRoute path="/activate"><ProfileSetup /></SemiProtectedRoute>
               <ProtectedRoute path="/Home"><Home /></ProtectedRoute>
+              <ProtectedRoute path="/Chats/Users"><Chats /></ProtectedRoute>
 
 
             </Switch>

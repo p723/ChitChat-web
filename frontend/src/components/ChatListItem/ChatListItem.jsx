@@ -2,11 +2,18 @@
 
 import React from "react";
 import styled, { css } from "styled-components";
+import phone2 from "./images/phone2.svg";
+import messageSquare from "./images/message-square.svg";
+import video from "./images/video.svg";
+import info from "./images/info.svg";
+import { truncateString } from "../../helpers";
+import { Transition } from "react-spring";
 
 const StyledListItem = styled.a`
   background: #fafafa;
   display: flex;
   align-items: center;
+  text-decoration: none;
   &:active {
     background-color: #e4e4e4;
   }

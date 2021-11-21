@@ -11,8 +11,8 @@ class UserServices {
         const user = await userModel.create(data);
         return user;
     }
-    async getAllUsers(types) {
-        const users = await userModel.find({ activated: { $in: types } });
+    async getAllUsers(types, email) {
+        const users = await userModel.find({$and:[{ activated: { $in: types } }, { email: { $nin: [`${email}`] } }]  });
         const userDto = users.map((user) => new UserDto(user))
         return userDto;
     }

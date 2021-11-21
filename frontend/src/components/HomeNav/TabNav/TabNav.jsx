@@ -9,10 +9,9 @@ const TabNav = () => {
   const dispatch = useDispatch();
   const { activeTab } = useSelector((state) => state.tab);
   return (
-    <div>
-      <div className={style.tabMenu}>
+      <div className="flex items-center bg-greenw-500 dark:bg-gray-800 w-full">
         <div className={style.tabItem}>
-          <a href="#">
+          <a onClick={ (e) => dispatch(setActiveTab(0))}>
             <MdCameraAlt />
           </a>
         </div>
@@ -26,7 +25,7 @@ const TabNav = () => {
           Calls
         </a>
       </div>
-    </div>
+  
   );
 };
 

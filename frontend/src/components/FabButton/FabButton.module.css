@@ -5,12 +5,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
     border-radius: 50%;
     padding: 0;
     margin: 0;
+}
+.posi{
+  position: fixed;
+    bottom: 25px;
+    right: 25px;
 }
 .img{
     width: 25px;

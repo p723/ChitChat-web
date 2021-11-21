@@ -5,8 +5,8 @@ const UserDto = require('../dtos/userDtos');
 
 class ActivateController {
     async activate(req, res){
-        const {name, avatar, phone} = req.body;
-        if (!name, !avatar, !phone){
+        const {fullname, avatar, phone} = req.body;
+        if (!fullname, !avatar, !phone){
             res.status(400).json({message: 'all felds are required'});
         }
         // Image Base64
@@ -36,7 +36,7 @@ class ActivateController {
                 res.status(404).json({ message: 'User not found!' });
             }
             user.activated = true;
-            user.name = name;
+            user.name = fullname;
             user.avatar = `/storage/${imagePath}`;
             user.phone = phone;
             user.save();

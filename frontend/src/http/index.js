@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5500',
+    baseURL: process.env.REACT_APP_API_URL,
     withCredentials: true,
     headers: {
         'Content-type': 'application/json',
@@ -13,7 +13,12 @@ const api = axios.create({
 export const sendOtp = (data) => api.post('/api/send-otp', data);
 export const verifyOtp = (data) => api.post('/api/verify-otp', data);
 export const activate = (data) => api.post('/api/activate', data);
-export const getAllUsers = () => api.get('/api/chat/users');
+export const getAllUsers = (data) => api.post('/api/chat/users', data);
+export const getChatlist = (data) => api.post('/api/chat/chatlist', data);
+export const getChat = (data) => api.post('/api/chat/getchat', data);
+export const createChatlist = (data) => api.post('/api/chat/createChatlist', data);
+export const sendMsg = (data) => api.post('/api/chat/sendMsg', data);
+export const getAllMsgs = (data) => api.post('/api/chat/getAllMsgs', data);
 
 // Interceptors
 api.interceptors.response.use(
@@ -30,7 +35,7 @@ api.interceptors.response.use(
             originalRequest.isRetry = true;
             try {
                 await axios.get(
-                    'http://localhost:5500/api/refresh',
+                    process.env.REACT_APP_SERVER_URL+'/api/refresh',
                     {
                         withCredentials: true,
                     }

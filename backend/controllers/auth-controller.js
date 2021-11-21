@@ -62,7 +62,7 @@ class Authcontroller {
     try {
       user = await userServices.findUser({ email });
       if(!user){
-        user = await userServices.createUser({ email })
+      user = await userServices.createUser({ email })
       }
     } catch (err) {
       console.log(err)

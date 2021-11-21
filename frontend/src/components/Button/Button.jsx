@@ -1,5 +1,4 @@
 import React from "react";
-import '../../custom.scss';
 import styles from "./Button.module.css";
 // import Button from "../../components/shared/Button/Button";
 const Button = ({ text, onClick }) => {

@@ -1,24 +1,48 @@
+import React, { useState, useEffect, useRef } from 'react'
 import './App.css';
 import { IconContext } from "react-icons";
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-//import Navigation from './components/shared/Navigation/Navigation'
 import Wellcome from './screens/Wellcome/Wellcome';
 import Home from './screens/Home/Home';
 import Chats from './screens/Chats/Chats';
+import Chat from './screens/Chat/Chat';
 import Authenticate from './screens/AuthSteps/Authenticate/Authenticate';
 import ProfileSetup from './screens/AuthSteps/Activate/ProfileSetup/ProfileSetup';
-// import userEvent from '@testing-library/user-event';
-import { useSelector } from 'react-redux';
+import SettingsMenu from './screens/SettingScreens/SettingsMenu/SettingsMenu';
 import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
-       import Loader from './components/Loader/Loader';
-
-
-// const isAuth = true;
-// const user = {
-//   activated: true,
-// }; 
+import Loader from './components/Loader/Loader';
+import { io } from "socket.io-client";
+import { useDispatch, useSelector } from "react-redux";
+import { setSocketId } from "./store/authSlice";
 
 function App() {
+  //initialisation variables
+  const socket = useRef();
+  const dispatch = useDispatch();
+  //use State variables
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  //switched by react-redux
+  const { user } = useSelector((state) => state.auth)
+  
+  useEffect(() => {
+    socket.current = io(process.env.REACT_APP_SOCKET_URL);
+    }, []);
+    
+  useEffect(() => {
+    if(user !== null && user.id){
+    socket.current.emit("addUser", user.id);
+    socket.current.on("getUsers", (users) => {
+      setOnlineUsers(users);
+      console.log(users)
+    });
+    socket.current.on("getSocketId", (data) =>{
+      const socketId = data;
+      dispatch(setSocketId({socketId}));
+      console.log(process.env.REACT_APP_SOCKET_URL)
+    } );
+    }
+  }, [user]);
+  
   const { loading } = useLoadingWithRefresh();
 
   return loading ? (
@@ -32,8 +56,10 @@ function App() {
               {/* <Route path="/register"><Register /></Route> */}
 
               <SemiProtectedRoute path="/activate"><ProfileSetup /></SemiProtectedRoute>
-              <ProtectedRoute path="/Home"><Home /></ProtectedRoute>
+              <ProtectedRoute path="/Home"><Home socket={socket} onlineUsers={onlineUsers} /></ProtectedRoute>
               <ProtectedRoute path="/Chats/Users"><Chats /></ProtectedRoute>
+              <ProtectedRoute path="/Chat/:chatId"><Chat /></ProtectedRoute>
+              <ProtectedRoute path="/Settings"><SettingsMenu /></ProtectedRoute>
 
 
             </Switch>

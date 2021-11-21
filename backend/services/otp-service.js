@@ -33,7 +33,7 @@ class Otpservice {
 const mailOptions = {
   from: 'techxpo.contact@gmail.com',
   to: email,
-  subject: 'Sending Email using Node.js',
+  subject: 'To Verify you on ChitChat',
   text: `Your one time password is ${otp}.
   do not share this code with anyone else 😜`
 };

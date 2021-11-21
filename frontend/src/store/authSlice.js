@@ -8,7 +8,8 @@ export const authSlice = createSlice({
     otp: {
       email: "",
       hash: "",
-    }
+    },
+    socketId: "",
   },
   reducers: {
     setAuth: (state, action) => {
@@ -24,11 +25,15 @@ export const authSlice = createSlice({
       const { email, hash } = action.payload;
       state.otp.email = email;
       state.otp.hash = hash;
+    },
+    setSocketId: (state, action) => {
+      const { socketId } = action.payload;
+      state.socketId = socketId;
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { setAuth, setOtp } = authSlice.actions
+export const { setAuth, setOtp, setSocketId } = authSlice.actions
 
 export default authSlice.reducer

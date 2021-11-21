@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Input from '../../../../components/Input/Input';
 import Button from '../../../../components/Button/Button';
 import Styles from './ProfileScreen.module.css';
 import { useSelector, useDispatch } from "react-redux";
@@ -13,7 +12,7 @@ const ProfileSetup = () => {
   const [phone, setPhone] = useState("+91");
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState('/images/user-avatar.png');
-  const { name, avatar, storephone } = useSelector((state) => state.activate);
+  const { avatar } = useSelector((state) => state.activate);
     
     function captureImage(e) {
         const file = e.target.files[0];
@@ -68,7 +67,7 @@ const ProfileSetup = () => {
                     src={image} 
                     width="95%" 
                     height="95%"
-                    alt="profile-image"
+                    alt="profile"
                     className={Styles.pImg} 
                     />
             </div>

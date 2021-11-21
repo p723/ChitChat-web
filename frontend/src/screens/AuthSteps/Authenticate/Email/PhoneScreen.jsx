@@ -1,18 +1,10 @@
 import React, { useState }  from "react";
 import styles from "./PhoneScreen.module.css";
-import Button from "../../../../components/Button/Button";
-import Input from "../../../../components/Input/Input";
 import 'react-phone-input-2/lib/material.css'
 import { sendOtp } from "../../../../http";
 import { useDispatch } from "react-redux";
 import { setOtp } from "../../../../store/authSlice";
 
-
-const inputStyle = {
-   width: "50px",
-   color: "#000",
-   fontSize: "17px"
-}
 const PhoneScreen = ({onNext}) => {
 const [email, setEmail] = useState("");
 const [loading, setLoading] = useState(false);
@@ -34,23 +26,24 @@ async function submit() {
 
   return (
     <>
-     <div className="container w-100">
-         <div className="mt-5 text-center aline-item-center">
-         <h1 className="pt-3 text-primary text-bold fs-1">
-         Enter your Email Address
-         </h1>
-         <p className="text-center text-black-50 mb-5">By entering your Email address <br /> w'll text you a one time password</p>
-          </div>
-         <div className="text-center">
-         <div className="text-center d-inline-flex mb-4">
-         <Input
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-         />
-         </div>
-         <div >
-         { loading ? 
+      <div className="container dark:bg-gray-800 h-screen p-2 block items-center mx-auto">
+    <div className="pt-5 text-center">
+      <div className="text-green-600 font-bold text-4xl mt-5">
+        Login
+      </div>
+      <div className="text-gray-500 dark:text-green-100 text-2xl my-3">Enter your email address</div>
+      <div className="text-gray-400 dark:text-gray-500 text-sm mt-3">
+        By entering your Email address w'll text you <br /> a one time password
+      </div>
+    </div>
+    <div className="flex justify-center items-center transition-all">
+      <div className="text-center w-60 rounded-md mt-5 text-gray-400 focus-within:text-black inline-flex justify-center border border-transparent focus-within:outline-none focus-within:ring-2 focus-within:ring-green-600 transition-all focus-within:border-transparent">
+        <div className="py-2 pl-2 px-1 rounded-l-md bg-gray-200 dark:bg-white w-1/5 transition-all"><i className="fa-solid fa-envelope transition-all"></i></div>
+        <input className="py-2 pl-2 px-1 w-4/5 rounded-r-md bg-gray-200 dark:bg-white focus:outline-none transition-all" placeholder="jone@example.com" onChange={(e) => setEmail(e.target.value)} type="email" />
+      </div>
+    </div>
+    <div className="text-center flex justify-center w-full mt-5">
+    { loading ? 
          <svg
                     className={styles.spinner}
                     width="42"
@@ -61,8 +54,7 @@ async function submit() {
                     <circle
                         cx="21"
                         cy="21"
-                        r="18"
-                        stroke="#C4C5C5"
+                        r="58"
                         strokeWidth="4"
                     />
                     <path
@@ -70,11 +62,10 @@ async function submit() {
                         fill="#009977"
                     />
                 </svg> :
-         <Button onClick={submit} text="next" /> }
-         </div>
-         </div>
-         
-     </div>
+      <button className="py-2 px-6 rounded-md text-center font-bold text-white bg-green-600 hover:bg-green-800 hover:text-gray-100" onClick={submit} >Next</button>
+    }
+    </div>
+  </div>
     </>
   );
 };

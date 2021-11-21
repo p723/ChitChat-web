@@ -8,6 +8,11 @@ router.post('/api/send-otp', authcontroller.sendOtp);
 router.post('/api/verify-otp', authcontroller.verifyOtp);
 router.post('/api/activate', authMiddleware, ActivateController.activate);
 router.get('/api/refresh', authcontroller.refresh);
-router.get('/api/chat/users', authMiddleware, ChatController.getUsers);
+router.post('/api/chat/users', ChatController.getUsers);
+router.post('/api/chat/chatlist', ChatController.getChatlist);
+router.post('/api/chat/getchat', ChatController.getChat);
+router.post('/api/chat/createChatlist', ChatController.createChatlist);
+router.post('/api/chat/sendMsg', ChatController.sendMsg);
+router.post('/api/chat/getAllMsgs', ChatController.getAllMsgs);
 
 module.exports = router;

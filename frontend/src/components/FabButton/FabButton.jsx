@@ -3,10 +3,10 @@ import style from "./FabButton.module.css";
 const FabButton = ({ onClick, image }) => {
   return (
     <>
-      <div>
+      <div className={style.posi}>
         <div onClick={onClick} className={style.fab}>
           <div className={style.fabIcon}>
-            <img className={style.img} src={image ? image : "/images/user-avatar.png"} alt="image" />
+          <i className="fas fa-user-circle text-2xl text-white"></i>
           </div>
         </div>
       </div>

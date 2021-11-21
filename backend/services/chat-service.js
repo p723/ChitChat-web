@@ -1,30 +1,29 @@
+const chatlistModel = require("../models/chatlist-model");
 const Chatlist = require("../models/chatlist-model");
 
 class ChatServices {
 
-    async findChatlist(filter) {
-        
+    async findChatlist(margeId) {
+        const chatList = await chatlistModel.findOne(margeId);
+        return chatList;
+    }
+    async findChat(chatId) {
+        const chat = await chatlistModel.findOne(chatId)
+        .populate('user1')
+        .populate('user2')
+        .exec();
+        return chat;
     }
     async createChatlist(data) {
-      const type = chat;
-      const user1 = {
-        id: "1",
-        name: "pranav",
-        avatar: "/storage/"
-      };
-      const user2 = {
-        id: "2",
-        name: "pranav",
-        avatar: "/storage/"
-      };
-      
-        const chatlist = new Chatlist({
-          type,
-          users: [user1.id, user2.id]
-        })
+        const chatlist = await chatlistModel.create(data);
+        return chatlist;
     }
-    async getAllUsers(types) {
-        
+    async getChatlist(uid) {
+        const chatList = await chatlistModel.find({$or:[{ user1: uid }, { user2: uid }] })
+        .populate('user1')
+        .populate('user2')
+        .exec();
+        return chatList;
     }
 }
 

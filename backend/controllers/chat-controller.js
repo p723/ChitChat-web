@@ -30,11 +30,9 @@ class ChatController {
    let margeId = `${user1}.${user2}`;
   // return res.json(margeId);
    let margeId2 = `${user2}.${user1}`;
-      chatlist = null;
       chatlist = await ChatServices.findChatlist({ margeId });
       console.log(`margeId1:${margeId}`);
       if(!chatlist){
-        chatlist = null;
         chatlist = await ChatServices.findChatlist({ margeId2 });
         console.log(`margeId2:${margeId2}`);
         if(chatlist){
@@ -42,7 +40,8 @@ class ChatController {
           console.log(chatlist);
         if(chatlist.margeId == margeId2){
         return res.json(chatlist);
-      }else{
+      }
+        }else{
     console.log("chatlist not found");
     var chatId = uuid4();
     
@@ -54,7 +53,6 @@ class ChatController {
       res.status(500).json({ message: 'database error'})    
     }
    }  
-        }
       
      }else{
        console.log("chatlist found 1st");

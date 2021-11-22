@@ -17,13 +17,13 @@ const removeUser = (socketId) => {
 
 const io = require('socket.io')(5000,{
   cors:{
-    origin: "http://localhost:3000",
+    origin: "https://chat.techxpo.live",
   },
 });
 app.use(cookieParser());
 const corsOption = {
     credentials: true,
-    origin: ['http://localhost:3000']
+    origin: ['https://chat.techxpo.live']
 }
 
 const PORT = process.env.PORT || 5500;
@@ -46,6 +46,7 @@ io.on("connection", (socket) => {
   //take userId and socketId from user
   socket.on("addUser", (userId) => {
     addUser(userId, socket.id);
+    console.log(users);
     io.emit("getUsers", users);
     io.emit("getSocketId", socket.id);
   });

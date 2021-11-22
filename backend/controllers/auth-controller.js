@@ -93,6 +93,7 @@ class Authcontroller {
 
   }
   async refresh(req, res) {
+        console.log("refresh called");
         // get refresh token from cookie
         const { refreshToken: refreshTokenFromCookie } = req.cookies;
         // check if token is valid

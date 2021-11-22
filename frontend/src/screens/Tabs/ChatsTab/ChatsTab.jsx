@@ -28,7 +28,7 @@ const ChatTab = (onlineUsers) => {
                <div className="list px-4 py-3 flex justify-between" onClick={(e) => history.push(`/chat/${chatlist.chatId}`)}>
       <div className="flex">
         <div className="relative">
-          <img className="w-12 h-12 overflow-hidden object-cover rounded-full" src={user.id === chatlist.user1._id ? 'http://localhost:5500'+chatlist.user2.avatar : 'http://localhost:5500'+chatlist.user1.avatar } alt="avtar"/>
+          <img className="w-12 h-12 overflow-hidden object-cover rounded-full" src={user.id === chatlist.user1._id ? process.env.REACT_APP_API_URL+chatlist.user2.avatar : process.env.REACT_APP_API_URL+chatlist.user1.avatar } alt="avtar"/>
           <div className="absolute bottom-1 -mr-1 -mb-0 right-0 w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
           <div className="absolute bottom-1 -mr-1 -mb-0 right-0 w-3 h-3 bg-green-500 rounded-full"></div>
         </div>

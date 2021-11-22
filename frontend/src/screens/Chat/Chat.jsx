@@ -34,10 +34,6 @@ const Chat = () => {
   }, [msgs]);
 
   async function sendText() {
-    const user = crypto.createECDH('secp256k1');
-    user.generateKeys();
-    const userPublicKeyBase64 = user.getPublicKey().toString('base64');
-
     const receiver = user.id === datas.user1._id ? datas.user2._id : datas.user1._id;
     var datet = new Date();
     const time = datet.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
@@ -104,7 +100,7 @@ const Chat = () => {
       <div className="left flex items-center">
           <i className="fas fa-arrow-left fs-6 fw-bold mx-1 text-xl" onClick={(e) => history.push('/Home')}></i>
             <div className="relative mx-1">
-                <img className="w-10 h-10 overflow-hidden object-cover rounded-full" src={ user.id === datas.user1._id ? 'http://localhost:5500'+datas.user2.avatar : 'http://localhost:5500'+datas.user1.avatar} width="50px" alt=""/>
+                <img className="w-10 h-10 overflow-hidden object-cover rounded-full" src={ user.id === datas.user1._id ? process.env.REACT_APP_API_URL+datas.user2.avatar : process.env.REACT_APP_API_URL+datas.user1.avatar} width="50px" alt=""/>
                 <div className="absolute bottom-1 -mr-1 -mb-0 right-0 w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
                 <div className="absolute bottom-1 -mr-1 -mb-0 right-0 w-3 h-3 bg-green-500 rounded-full"></div>
             </div>
@@ -117,7 +113,7 @@ const Chat = () => {
             <i className="fas fa-ellipsis-v"></i>
         </div>
   </div>
-    <div className="h-f pb-16 w-full block bg-gray-700 pt-5 px-1 overflow-y-scroll">
+    <div className="h-full pb-16 w-full block bg-gray-700 pt-5 px-1 overflow-y-scroll">
     <div className="info flex justify-center p-2">
       <p className="bg-gray-600 max-w-max px-1 py-1 text-sm rounded text-gray-100">You started the chat</p>
     </div>

@@ -7,7 +7,7 @@ import FabButton from "../../components/FabButton/FabButton";
 import { useHistory } from "react-router-dom";
 
 
-const Home = (socket, onlineUsers) => {
+const Home = ({ socket }) => {
   const history = useHistory();
   function ShowAllUsers() {
     history.push("/Chats/Users");
@@ -16,7 +16,7 @@ const Home = (socket, onlineUsers) => {
         <div className="relative m-0 p-p">
             <HeaderTop />    
             <TabNav />
-            <HomeTabs onlineUsers={onlineUsers} />
+            <HomeTabs socket={socket} />
             <FabButton onClick={ShowAllUsers} />
             
         </div>

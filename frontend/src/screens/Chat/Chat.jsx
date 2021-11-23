@@ -3,7 +3,7 @@ import crypto from 'crypto'
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { getChat, sendMsg, getAllMsgs } from '../../http';
-const Chat = () => {
+const Chat = ({ socket }) => {
   const { chatId } = useParams();
   const history = useHistory();
   const [datas, setData] = useState([]);

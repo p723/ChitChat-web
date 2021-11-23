@@ -4,13 +4,13 @@ import StatusTab from "../../screens/Tabs/StatusTab/StatusTab";
 import CallsTab from "../../screens/Tabs/CallsTab/CallsTab";
 import { useSelector } from "react-redux";
 
-const HomeTabs = (onlineUsers) => {
+const HomeTabs = ({ socket }) => {
   const { activeTab } = useSelector((state) => state.tab);
   return (
     <div className="w-full h-screen bg-white dark:bg-gray-600">
    
    {
-   activeTab === 0 ? "cameratab" : activeTab === 1 ? <ChatsTab onlineUsers={onlineUsers} /> : activeTab === 2 ? <StatusTab /> : activeTab === 3 ?  <CallsTab /> : null
+   activeTab === 0 ? "cameratab" : activeTab === 1 ? <ChatsTab socket={socket} /> : activeTab === 2 ? <StatusTab /> : activeTab === 3 ?  <CallsTab /> : null
 }
     </div>
   );

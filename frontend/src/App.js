@@ -16,32 +16,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSocketId } from "./store/authSlice";
 
 function App() {
-  //initialisation variables
-  const socket = useRef();
   const dispatch = useDispatch();
-  //use State variables
-  const [onlineUsers, setOnlineUsers] = useState([]);
-  //switched by react-redux
-  const { user } = useSelector((state) => state.auth)
   
-  useEffect(() => {
-    socket.current = io(process.env.REACT_APP_SOCKET_URL);
-    }, []);
-    
-  useEffect(() => {
-    if(user !== null && user.id){
-    socket.current.emit("addUser", user.id);
-    socket.current.on("getUsers", (users) => {
-      setOnlineUsers(users);
-      console.log(users)
-    });
-    socket.current.on("getSocketId", (data) =>{
-      const socketId = data;
-      dispatch(setSocketId({socketId}));
-      console.log(process.env.REACT_APP_SOCKET_URL)
-    } );
-    }
-  }, [user]);
+  const socket.current = io("https://api.techxpo.live",  {secure: true});
   
   const { loading } = useLoadingWithRefresh();
 
@@ -58,7 +35,7 @@ function App() {
               <SemiProtectedRoute path="/activate"><ProfileSetup /></SemiProtectedRoute>
               <ProtectedRoute path="/Home"><Home socket={socket} onlineUsers={onlineUsers} /></ProtectedRoute>
               <ProtectedRoute path="/Chats/Users"><Chats /></ProtectedRoute>
-              <ProtectedRoute path="/Chat/:chatId"><Chat /></ProtectedRoute>
+              <ProtectedRoute path="/Chat/:chatId"><Chat socket={socket} /></ProtectedRoute>
               <ProtectedRoute path="/Settings"><SettingsMenu /></ProtectedRoute>
 
 

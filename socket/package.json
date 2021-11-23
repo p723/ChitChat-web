@@ -1,0 +1,16 @@
+{
+  "name": "socket",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "^4.4.0"
+  },
+  "scripts": {
+    "dev": "nodemon socket.js",
+    "serve": "node socket.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

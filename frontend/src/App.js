@@ -11,37 +11,35 @@ import ProfileSetup from './screens/AuthSteps/Activate/ProfileSetup/ProfileSetup
 import SettingsMenu from './screens/SettingScreens/SettingsMenu/SettingsMenu';
 import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
 import Loader from './components/Loader/Loader';
-import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
-import { setSocketId } from "./store/authSlice";
+import { SocketProvider } from './Contexts/SocketProvider';
 
 function App() {
   const dispatch = useDispatch();
   
-  const socket.current = io("https://api.techxpo.live",  {secure: true});
-  
+  const { user } = useSelector((state) => state.auth);
   const { loading } = useLoadingWithRefresh();
 
   return loading ? (
         <Loader message="Loading, please wait.." />
-    ) : (<BrowserRouter>
+    ) : (
+      <BrowserRouter>
           <IconContext.Provider value={{ color: "#fff", className: "icon" }}>
 
             <Switch>
               <GuestRoute path="/" exact><Wellcome /></GuestRoute>
               <GuestRoute path="/authenticate"><Authenticate /></GuestRoute>
               {/* <Route path="/register"><Register /></Route> */}
-
               <SemiProtectedRoute path="/activate"><ProfileSetup /></SemiProtectedRoute>
-              <ProtectedRoute path="/Home"><Home socket={socket} onlineUsers={onlineUsers} /></ProtectedRoute>
-              <ProtectedRoute path="/Chats/Users"><Chats /></ProtectedRoute>
-              <ProtectedRoute path="/Chat/:chatId"><Chat socket={socket} /></ProtectedRoute>
-              <ProtectedRoute path="/Settings"><SettingsMenu /></ProtectedRoute>
-
-
+              <SocketProvider id={user?.id}>
+                <ProtectedRoute path="/Home"><Home /></ProtectedRoute>
+                <ProtectedRoute path="/Chats/Users"><Chats /></ProtectedRoute>
+                <ProtectedRoute path="/Chat/:chatId"><Chat /></ProtectedRoute>
+                <ProtectedRoute path="/Settings"><SettingsMenu /></ProtectedRoute>
+              </SocketProvider>
             </Switch>
             </IconContext.Provider>
-         </BrowserRouter>)
+        </BrowserRouter>)
 }
 
 const GuestRoute = ({ children, ...rest }) =>{

@@ -4,14 +4,11 @@ import { useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
 
-const ChatTab = (onlineUsers) => {
+const ChatTab = () => {
   const history = useHistory();
   const [chatlists, setChatlist] = useState([]);
   const { user } = useSelector((state) => state.auth);
  
-  useEffect(() => {
-  console.log(onlineUsers);
-   }, [onlineUsers]);
   useEffect(() => {
         const fetchChatlist = async () => {
             const uid = user.id;

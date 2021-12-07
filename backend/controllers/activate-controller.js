@@ -5,6 +5,7 @@ const UserDto = require('../dtos/userDtos');
 
 class ActivateController {
     async activate(req, res){
+      console.log("called");
         const {fullname, avatar, phone} = req.body;
         if (!fullname, !avatar, !phone){
             res.status(400).json({message: 'all felds are required'});

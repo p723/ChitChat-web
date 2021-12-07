@@ -3,13 +3,17 @@ import crypto from 'crypto'
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { getChat, sendMsg, getAllMsgs } from '../../http';
-const Chat = ({ socket }) => {
+import { useSocket } from '../../Contexts/SocketProvider';
+
+const Chat = () => {
   const { chatId } = useParams();
   const history = useHistory();
+  const socket = useSocket()
   const [datas, setData] = useState([]);
   const [msgs, setMsgs] = useState([]);
   const [loading, setloading] = useState(true);
   const [msg, setMsg] = useState("");
+  const [newMsg, setNewMsg] = useState(null);
   const { user } = useSelector((state) => state.auth);
   const scrollRef = useRef();
   
@@ -20,8 +24,20 @@ const Chat = ({ socket }) => {
     };
     fetchChat();
     setloading(false)
+    socket.on('getMessage', ({ chatIdSocket, text, sender, time }) =>{
+        console.log("message received")
+        console.log(newMsg)
+       if(chatIdSocket === chatId){
+         console.log("chat id match")
+        setNewMsg({ sender, text, time });
+       }
+    })
+
   }, []);
-  
+  useEffect(() => {
+      setMsgs((prev) => [...prev, newMsg]);
+  }, [newMsg]);
+
   useEffect(() => {
     const fetchMessages = async () => {
       const { data } = await getAllMsgs({ chatId });
@@ -42,8 +58,13 @@ const Chat = ({ socket }) => {
     setMsg("");
     const sender = user.id;
     const type = "text";
+    socket.emit('sendMessage', { chatId, text, sender, receiver, time });
+    try{
     const { data } = await sendMsg({ chatId, text, sender, receiver, type, time });
     setMsgs([...msgs, data]);
+    }catch(err){
+      console.log(err)
+    }
   }
   if (loading) {
     return (

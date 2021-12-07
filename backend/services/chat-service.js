@@ -4,7 +4,7 @@ const Chatlist = require("../models/chatlist-model");
 class ChatServices {
 
     async findChatlist(margeId) {
-        const chatList = await chatlistModel.findOne(margeId);
+        const chatList = await chatlistModel.find(margeId).limit();
         return chatList;
     }
     async findChat(chatId) {

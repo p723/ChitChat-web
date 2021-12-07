@@ -55,80 +55,50 @@ const ProfileSetup = () => {
     }
 
     return (
-        <div className="text-center">
-            <div className="titel mt-5">
-                <h1 className="text-primary">Profile</h1>
-                <p className="text-black-50">Setup your Profile</p>
-            </div>
-            <div className={Styles.imgCenter}>
-
-            <div className={Styles.imageWrrapper}>
-                <img 
-                    src={image} 
-                    width="95%" 
-                    height="95%"
-                    alt="profile"
-                    className={Styles.pImg} 
-                    />
-            </div>
-                    </div>
-            <div>
-                    <input
-                        onChange={captureImage}
-                        id="avatarInput"
-                        type="file"
-                        className="d-none"
-                    />
-                    <label className={Styles.avatarLabel} htmlFor="avatarInput">
-                        choose profile picture (optional)
-                    </label>
-                </div>
-            <div className="mt-4">
-                <input 
-                className={Styles.inp}
-                placeholder="Your name"
-                type="text"
-                value={fullname}
-                onChange={(e) => setFullname(e.target.value)}
-                />
-                <input
-                className={Styles.inp}
-                value={phone}
-                type="tel"
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="phone number"  
-                />
-                <p>{fullname}</p>
-                <p>{phone}</p>
-            </div>
-            <div className="btn-wrap mt-5">
-                     { loading ? 
-         <svg
-                    className={Styles.spinner}
-                    width="42"
-                    height="42"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <circle
-                        cx="21"
-                        cy="21"
-                        r="18"
-                        stroke="#C4C5C5"
-                        strokeWidth="4"
-                    />
-                    <path
-                        d="M20.778 1.001A20 20 0 111.542 25.627l3.876-.922a16.016 16.016 0 1015.404-19.72l-.044-3.984z"
-                        fill="#009977"
-                    />
-                </svg> :
-                <Button
-                text="Next ->"
-                onClick={submitData}
-                />}
-            </div>
-        </div>
+      <>
+         <div className="w-full container h-screen bg-gray-700">
+    <div className="pt-5 text-center">
+      <div className="text-blue-600 font-bold text-4xl mt-5">
+        Profile
+      </div>
+      <div className="text-blue-100 text-2xl my-3">Enter your name & phone</div>
+      <div className="text-gray-500 text-sm mt-3">
+        your information is fully safe here 😉
+      </div>
+    </div>
+    <div className="flex justify-center items-center w-full">
+      <div className="text-center text-white pt-10">
+        <label htmlFor="profile">
+          <img className="w-24 h-24 rounded-full border-2 p-1 border-blue-600" src={image} alt="profile"/>
+        </label>
+        <input type="file" onChange={captureImage} id="profile" hidden />
+      </div>
+    </div>
+    <div className="flex justify-center items-center w-full">
+      <div className="text-center w-60 rounded-md mt-5 text-gray-400 focus-within:text-black inline-flex justify-center border border-transparent focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:border-transparent">
+        <div className="py-2 pl-2 px-1 rounded-l-md bg-white w-1/5"><i className="fa-solid fa-user"></i></div>
+        <input className="py-2 pl-2 px-1 w-4/5 rounded-r-md focus:outline-none" placeholder="Elon Musk" type="text" value={fullname} onChange={(e) => setFullname(e.target.value)} />
+      </div>
+    </div>
+    <div className="flex justify-center items-center w-full">
+      <div className="text-center w-60 rounded-md mt-5 text-gray-400 focus-within:text-black inline-flex justify-center border border-transparent focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:border-transparent">
+        <div className="py-2 pl-2 px-1 rounded-l-md bg-white w-1/5"><i className="fa-solid fa-phone"></i></div>
+        <input className="py-2 pl-2 px-1 w-4/5 rounded-r-md focus:outline-none" placeholder="+91-9876543210" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+      </div>
+    </div>
+   { loading ?(
+   <div className="flex mt-5 justify-center items-center w-full">
+      <img src="images/tail-spin.svg" />
+    </div>
+   ) : (
+    <div className="text-center w-full mt-5">
+      <button className="py-2 px-6 rounded-md text-center font-bold text-white bg-blue-600 hover:bg-blue-800 hover:text-gray-100" onClick={submitData}>Next</button>
+    </div>)
+     
+   }
+    </div>
+    </>
     )
 }
 
-export default ProfileSetup
+export default ProfileSetup;

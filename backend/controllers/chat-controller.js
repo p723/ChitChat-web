@@ -32,20 +32,28 @@ class ChatController {
    let margeId2 = `${user2}.${user1}`;
       chatlist = await ChatServices.findChatlist({ margeId });
       console.log(`margeId1:${margeId}`);
-      if(!chatlist){
+      console.log(`chatlist1:${chatlist}`);
+      
+      if(!chatlist || !chatlist.margeId){
+        chatlist = null;
         chatlist = await ChatServices.findChatlist({ margeId2 });
         console.log(`margeId2:${margeId2}`);
-        if(chatlist){
+        console.log(`chatlist2:${chatlist}`);
+        if(chatlist && chatlist.margeId){
           console.log("chatlist found 2nd");
           console.log(chatlist);
-        if(chatlist.margeId == margeId2){
+        if(chatlist.margeId === margeId2){
         return res.json(chatlist);
+      }else{
+        res.status(500).json({ message: 'chatlist 2nd not match'})    
+  
       }
         }else{
     console.log("chatlist not found");
     var chatId = uuid4();
     
     try {
+      chatlist = null;
       chatlist = await ChatServices.createChatlist({ chatId, chatType, margeId, user1, user2 })
       return res.json(chatlist);
     } catch (err) {
@@ -57,9 +65,9 @@ class ChatController {
      }else{
        console.log("chatlist found 1st");
        console.log(chatlist);
-       if(chatlist.margeId == margeId){
+       if(chatlist.margeId === margeId){
         return res.json(chatlist);
-      } 
+      }
      }
      
   }

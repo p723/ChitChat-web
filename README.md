@@ -1,5 +1,3 @@
 # ChitChat-web
 
-Project is not completed 
-
-Demo: https://chat.techxpo.live/
+Project is completed but it's not get served on the internet
